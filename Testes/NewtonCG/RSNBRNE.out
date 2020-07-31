@@ -1,0 +1,29 @@
+NewtonCG with backtrack line search.
+
+CUTEst problem................: RSNBRNE
+Number of variables...........: 2
+Maximum problem iterations....: 1000
+Maximum subproblem iterations.: 1000
+Maximum line search iterations: 1000
+Time limit....................: 10 min
+
+Total iterations........................: 0
+Subproblem iterations...................: 0
+Line search iterations..................: 0
+Number of objective function evaluations: 0
+Number of gradient evaluations..........: 1
+Number of hessian evaluations...........: 0
+Total time in seconds...................: 0.000017
+Subproblem time in seconds..............: 0.000000
+Line search time in seconds.............: 0.000000
+How many times subproblem failed........: 0
+How many times line search failed.......: 0
+
+___________________________________________________________________________
+iter    f(x*)            ‖∇f(x*)‖         alpha            ‖d‖            
+‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+
+Objective.............: 0.000000e+00
+Gradient norm.........: 0.000000e+00
+Time..................: 1.651700e-05
+EXIT: convergence has been achieved.

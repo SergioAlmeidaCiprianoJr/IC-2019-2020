@@ -1,0 +1,35 @@
+NewtonCG with backtrack line search.
+
+CUTEst problem................: INTEQNELS
+Number of variables...........: 502
+Maximum problem iterations....: 1000
+Maximum subproblem iterations.: 1000
+Maximum line search iterations: 1000
+Time limit....................: 10 min
+
+Total iterations........................: 6
+Subproblem iterations...................: 12
+Line search iterations..................: 0
+Number of objective function evaluations: 6
+Number of gradient evaluations..........: 7
+Number of hessian evaluations...........: 6
+Total time in seconds...................: 0.128553
+Subproblem time in seconds..............: 0.094082
+Line search time in seconds.............: 0.004456
+How many times subproblem failed........: 0
+How many times line search failed.......: 0
+
+___________________________________________________________________________
+iter    f(x*)            ‖∇f(x*)‖         alpha            ‖d‖            
+1       4.477709e-02     4.156054e+00     1.000000e+00     1.377551e+00   
+2       1.504844e-03     4.810583e-01     1.000000e+00     1.795117e-01   
+3       5.229458e-05     9.226593e-02     1.000000e+00     3.150130e-02   
+4       5.852025e-09     1.640852e-02     1.000000e+00     6.478239e-03   
+5       1.272607e-15     1.579529e-04     1.000000e+00     7.421260e-05   
+6       8.847108e-26     7.314929e-08     1.000000e+00     3.482397e-08   
+‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+
+Objective.............: 8.847108e-26
+Gradient norm.........: 6.001031e-13
+Time..................: 1.285533e-01
+EXIT: convergence has been achieved.

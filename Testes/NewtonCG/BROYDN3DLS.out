@@ -1,0 +1,42 @@
+NewtonCG with backtrack line search.
+
+CUTEst problem................: BROYDN3DLS
+Number of variables...........: 5000
+Maximum problem iterations....: 1000
+Maximum subproblem iterations.: 1000
+Maximum line search iterations: 1000
+Time limit....................: 10 min
+
+Total iterations........................: 13
+Subproblem iterations...................: 46
+Line search iterations..................: 0
+Number of objective function evaluations: 13
+Number of gradient evaluations..........: 14
+Number of hessian evaluations...........: 13
+Total time in seconds...................: 0.045027
+Subproblem time in seconds..............: 0.030971
+Line search time in seconds.............: 0.004742
+How many times subproblem failed........: 0
+How many times line search failed.......: 0
+
+___________________________________________________________________________
+iter    f(x*)            ‖∇f(x*)‖         alpha            ‖d‖            
+1       4.274132e+02     5.673588e+02     1.000000e+00     1.400360e+01   
+2       1.769089e+01     1.399053e+02     1.000000e+00     5.667610e+00   
+3       3.012418e+00     4.067433e+01     1.000000e+00     8.285572e-01   
+4       5.850321e-01     1.620203e+01     1.000000e+00     3.603617e-01   
+5       1.234049e-01     6.993946e+00     1.000000e+00     1.468321e-01   
+6       2.706568e-02     3.057296e+00     1.000000e+00     7.311594e-02   
+7       6.070252e-03     1.504475e+00     1.000000e+00     3.096953e-02   
+8       6.620769e-05     6.771124e-01     1.000000e+00     2.381097e-02   
+9       7.050340e-06     1.028909e-01     1.000000e+00     1.149876e-03   
+10      2.390665e-08     3.108521e-02     1.000000e+00     6.306703e-04   
+11      2.591410e-11     2.080296e-03     1.000000e+00     2.733340e-05   
+12      4.787789e-16     5.828900e-05     1.000000e+00     1.128514e-06   
+13      6.611348e-23     2.457599e-07     1.000000e+00     4.923443e-09   
+‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+
+Objective.............: 6.611348e-23
+Gradient norm.........: 8.320002e-11
+Time..................: 4.502737e-02
+EXIT: convergence has been achieved.

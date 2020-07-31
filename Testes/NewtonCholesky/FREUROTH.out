@@ -1,0 +1,38 @@
+NewtonCholesky with backtrack line search.
+
+CUTEst problem................: FREUROTH
+Number of variables...........: 5000
+Maximum problem iterations....: 1000
+Maximum subproblem iterations.: 5000
+Maximum line search iterations: 1000
+Time limit....................: 10 min
+
+Total iterations........................: 9
+Subproblem iterations...................: 112635000
+Line search iterations..................: 252
+Number of objective function evaluations: 261
+Number of gradient evaluations..........: 9
+Number of hessian evaluations...........: 9
+Total time in seconds...................: 611.638820
+Subproblem time in seconds..............: 611.507673
+Line search time in seconds.............: 0.117158
+How many times subproblem failed........: 0
+How many times line search failed.......: 0
+
+___________________________________________________________________________
+iter    f(x*)            ‖∇f(x*)‖         alpha            ‖d‖            
+1       5.048471e+06     5.516237e+04     3.725290e-09     3.000000e+09   
+2       5.048450e+06     5.514750e+04     3.725290e-09     1.470347e+09   
+3       5.048446e+06     5.515297e+04     3.725290e-09     7.206403e+08   
+4       5.048444e+06     5.514985e+04     3.725290e-09     3.531972e+08   
+5       5.048444e+06     5.515127e+04     3.725290e-09     1.731075e+08   
+6       5.048444e+06     5.515055e+04     3.725290e-09     8.484271e+07   
+7       5.048444e+06     5.515090e+04     3.725290e-09     4.158275e+07   
+8       5.048444e+06     5.515073e+04     3.725290e-09     2.038036e+07   
+9       5.048444e+06     5.515081e+04     3.725290e-09     9.988735e+06   
+‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+
+Objective.............: 5.048444e+06
+Gradient norm.........: 5.515081e+04
+Time..................: 6.116388e+02
+EXIT: time limit exceeded.
