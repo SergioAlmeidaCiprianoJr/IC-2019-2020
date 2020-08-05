@@ -1,5 +1,4 @@
 using NLPModels, TimerOutputs
-import LinearOperators.LinearOperator
 include("../LineSearch/backtrack_line_search.jl")
 
 # Newton-Cholesky with backtrack line search.
@@ -77,19 +76,22 @@ function newtoncholesky(nlp::AbstractNLPModel; tle = 10, e = 1e-8, itMAX = 1e3)
 	return [x, obj(nlp, x), ∇fnorm, fcnt, gcnt, hcnt, it, itSUB, itBLS, 0, BLSf, stop, to, values]
 end
 
-function solvelinear(H::LinearOperator, ∇f::Array)
+function solvelinear(H, ∇f::Array)
     # output: search direction, iterations
     l, d, n = ldl(H)
     it = n*(n/2) + 2*n + n # ldl + 2*solveforl + solveDiagonal
-    # Lz = b, b = -∇f
-    z = solveforl(l, -∇f, n, 1)
-    # Dz* = z -> z* = D^-1z
-    [ z[i] = z[i]*(1/d[i]) for i=1:n ]
-    # L^Tx = z*
-    return solveforl(l, z, n, -1), it
+    # Lx = b, b = -∇f
+    x = solveforl(l, -∇f, n, 1)
+    # Dx* = x -> x* = D^-1x
+    # x* is the result
+    for i=1:n
+        x[i] /= d[i]
+    end
+    # L^Tx = b, b = x*
+    return solveforl(l, x, n, -1), it
 end
 
-function ldl(H::LinearOperator)
+function ldl(H)
     # output: lower triangular matrix, diagonal (matrix) vector, hessian nrows
     n = size(H,1)
     d = zeros(Float64, n)
@@ -97,16 +99,24 @@ function ldl(H::LinearOperator)
     l = [zeros(_) for _ = 1:n]
     ß = 1e-3
     Δ = 1e-8
-    max = 0
+    max = dll = 0
     for j = 1:n
+        if j>1
+            dll += l[j][j-1] * d[j-1] * l[j][j-1]
+        end
+        c[j][j] = H[j, j] - dll
         d[j] = maximum([abs(c[j][j]), (max/ß)^2, Δ])
-        c[j][j] = H[j, j] - sumto(j, j, d, l, false)
         max = 0
-        # l[j][j] = 1
         for i = j+1:n
-            c[i][j] = H[i, j] - sumto(i, j, d, l, false)
-            abs(c[i][j]) > max ? max = abs(c[i][j]) : nothing
+            dl = 0
+            for s = 1:j-1
+                dl += l[i][s] * d[s] * l[j][s]
+            end
+            c[i][j] = H[i, j] - dl
             l[i][j] = c[i][j]/d[j]
+            if abs(c[i][j]) > max
+                max = abs(c[i][j])
+            end
         end
     end
     return l, d, n
@@ -116,23 +126,17 @@ function solveforl(l::Array{Array{Float64,1},1}, b::Array, n::Integer, direction
     # solve Lx = b and returns x
     # for L being a triangular matrix with unit diagonal
     x = zeros(Float64, n)
-    j = 1; k = n
-    if direction == -1 
-        j = n; k = 1
+    start = n
+    finish = 1
+    if direction==1
+        start = 1
+        finish = n
     end
-    for i = j:direction:k
-        x[i] = b[i] - sumto(0, i, x, l, true)
+    xj = 0
+    first = true
+    for i = start:direction:finish
+        !first ? xj += x[i-direction] * ( direction==1 ? l[i][i-direction] : l[i-direction][i]) : first=false
+        x[i] = b[i] - xj
     end
     return x
-end
-
-function sumto(i::Integer, j::Integer, d::Array, l::Array, key::Bool)
-    # sum x*l
-    # and all sums l*d*l
-    dl = 0.0
-    for s = 1:j-1
-        key ? dl += d[s] * l[j][s] :
-              dl += d[s] * l[j][s] * l[i][s]
-    end
-    return dl
 end
