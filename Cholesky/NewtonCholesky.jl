@@ -99,13 +99,14 @@ function ldl(H)
     l = [zeros(_) for _ = 1:n]
     ß = 1e-3
     Δ = 1e-8
-    max = dll = 0
+    max = 0
     for j = 1:n
-        if j>1
-            dll += l[j][j-1] * d[j-1] * l[j][j-1]
+        dl = 0
+        for s = 1:j-1
+            dl += l[j][s] * d[s] * l[j][s]
         end
-        c[j][j] = H[j, j] - dll
         d[j] = maximum([abs(c[j][j]), (max/ß)^2, Δ])
+        c[j][j] = H[j, j] - dl
         max = 0
         for i = j+1:n
             dl = 0
