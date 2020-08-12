@@ -42,8 +42,7 @@ function newtoncholesky(nlp::AbstractNLPModel; tle = 10, e = 1e-8, itMAX = 1e3)
                 break
             end
             
-            H = hess(nlp, x)
-            p, j = @timeit to "linear_solver" solvelinear(H, ∇f)
+            p, j = @timeit to "linear_solver" solvelinear(hess(nlp, x), ∇f)
             itSUB += j
             hcnt += 1
             
@@ -79,7 +78,7 @@ end
 function solvelinear(H, ∇f::Array)
     # output: search direction, iterations
     l, d, n = ldl(H)
-    it = n*(n/2) + 2*n + n # ldl + 2*solveforl + solveDiagonal
+    it = n*(n/2) + 2*n + n # ldl + 2*solveforl + solveDiagonal iterations
     # Lx = b, b = -∇f
     x = solveforl(l, -∇f, n, 1)
     # Dx* = x -> x* = D^-1x
@@ -95,31 +94,46 @@ function ldl(H)
     # output: lower triangular matrix, diagonal (matrix) vector, hessian nrows
     n = size(H,1)
     d = zeros(Float64, n)
+    E = zeros(Float64, n)
     c = [zeros(_) for _ = 1:n]
     l = [zeros(_) for _ = 1:n]
-    ß = 1e-3
-    Δ = 1e-8
-    max = 0
-    for j = 1:n
-        dl = 0
-        for s = 1:j-1
-            dl += l[j][s] * d[s] * l[j][s]
-        end
-        d[j] = maximum([abs(c[j][j]), (max/ß)^2, Δ])
-        c[j][j] = H[j, j] - dl
-        max = 0
-        for i = j+1:n
-            dl = 0
-            for s = 1:j-1
-                dl += l[i][s] * d[s] * l[j][s]
-            end
-            c[i][j] = H[i, j] - dl
-            l[i][j] = c[i][j]/d[j]
-            if abs(c[i][j]) > max
-                max = abs(c[i][j])
-            end
+    γ = H[1,1] 
+    ξ = H[1,2]
+    for i = 1:n, j = 1:n
+        if i == j
+            c[i][i] = H[i,i]
+            # Find the maximum diagonal value
+            γ < H[i,i] ? γ = H[i,i] : nothing
+        else
+            # Find the maximum off-diagonal value
+            ξ < H[i,j] && H[i,j]!=0 ? ξ = H[i,j] : nothing
         end
     end
+    ν = maximum([1, sqrt(n^2-1)])
+    ßsquared = maximum([γ, ξ/ν, eps()])
+    #ßsquared = 1e-6
+    δ = 1e-8
+
+    for j = 1:n
+        for s = 1:j-1
+            l[j][s] = c[j][s]/d[j]
+        end 
+        _maxc = 0
+        for i = j+1:n
+            _sum = 0
+            for s = 1:j-1
+                _sum += l[j][s]*c[i][s]
+            end
+            c[i][j] = H[i][j] - _sum
+            _maxc < abs(c[i][j]) ? _maxc = abs(c[i][j]) : nothing
+        end
+        d[j] = maximum([δ, abs(c[j][j]), _maxc^2/ßsquared])
+        E[j] = d[j] - c[j][j]
+        for i = j+1:n
+            c[i][i] -= c[i][j]^2/d[j]
+        end
+    end
+
     return l, d, n
 end
 
@@ -133,11 +147,13 @@ function solveforl(l::Array{Array{Float64,1},1}, b::Array, n::Integer, direction
         start = 1
         finish = n
     end
-    xj = 0
-    first = true
+    xj = j = 0
     for i = start:direction:finish
-        !first ? xj += x[i-direction] * ( direction==1 ? l[i][i-direction] : l[i-direction][i]) : first=false
+        if j>0
+            xj += x[j] * ( direction==1 ? l[i][j] : l[j][i] )
+        end
         x[i] = b[i] - xj
+        j=i
     end
     return x
 end
