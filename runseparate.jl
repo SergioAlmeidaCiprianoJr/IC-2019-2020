@@ -20,17 +20,24 @@ function printprobleminfo(nlp::AbstractNLPModel, info::Array, output::Array, fil
             output[13]["newton_modified"]["backtrack_line_search"])/1e9
     end
 
-    @printf(file, "Total iterations........................: %d\n", output[7])
-    @printf(file, "Subproblem iterations...................: %d\n", output[8])
-    @printf(file, "Line search iterations..................: %d\n", output[9])
+    @printf(file, "‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾ output statistics ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾\n")
     @printf(file, "Number of objective function evaluations: %d\n", output[4])
     @printf(file, "Number of gradient evaluations..........: %d\n", output[5])
     @printf(file, "Number of hessian evaluations...........: %d\n", output[6])
-    @printf(file, "Total time in seconds...................: %f\n", totaltime)
+    @printf(file, "Subproblem iterations...................: %d\n", output[8])
     @printf(file, "Subproblem time in seconds..............: %f\n", timeSUB)
-    @printf(file, "Line search time in seconds.............: %f\n", timeLS)
     @printf(file, "How many times subproblem failed........: %d\n", output[10])
-    @printf(file, "How many times line search failed.......: %d\n\n", output[11])
+    @printf(file, "Line search iterations..................: %d\n", output[9])
+    @printf(file, "Line search time in seconds.............: %f\n", timeLS)
+    @printf(file, "How many times line search failed.......: %d\n", output[11])
+    @printf(file, "‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾\n\n")
+
+    @printf(file, "‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾ summary statistics ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾\n")
+    @printf(file, "Objective.............: %e\n", output[2])
+    @printf(file, "Gradient norm.........: %e\n", output[3])
+    @printf(file, "Total iterations......: %d\n", output[7])
+    @printf(file, "Total time in seconds.: %f\n", totaltime)
+    @printf(file, "‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾\n")
 
     println(file, repeat("_", 75))
     @printf(file, "%-6s  %-15s  %-15s  %-15s  %-15s\n",
@@ -44,10 +51,6 @@ function printprobleminfo(nlp::AbstractNLPModel, info::Array, output::Array, fil
                 i, allobj[i], norm(all∇f[i]), allalpha[i], allpnorm[i])
     end
     println(file, repeat("‾", 75))
-
-    @printf(file, "\nObjective.............: %e\n", output[2])
-    @printf(file, "Gradient norm.........: %e\n", output[3])
-    @printf(file, "Time..................: %e\n", totaltime)
 end
 
 norm(f) = sqrt(sum(f.*f))
@@ -84,9 +87,10 @@ function runcutest()
         end
         
         printprobleminfo(nlp, info, output, file)
-        @printf(file, "EXIT: %s\n", EXIT)
+        @printf(file, "\nEXIT: %s\n", EXIT)
         finalize(nlp)
         close(file)
+        println("Finished $(info[1])")
         break
     end
     close(io)
