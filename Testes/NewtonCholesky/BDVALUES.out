@@ -1,9 +1,9 @@
 NewtonCholesky with backtrack line search.
 
-CUTEst problem................: BROWNBSNE
-Number of variables...........: 2
+CUTEst problem................: BDVALUES
+Number of variables...........: 10002
 Maximum problem iterations....: 1000
-Maximum subproblem iterations.: 2
+Maximum subproblem iterations.: 10002
 Maximum line search iterations: 1000
 Time limit....................: 10 min
 
@@ -13,7 +13,7 @@ Line search iterations..................: 0
 Number of objective function evaluations: 0
 Number of gradient evaluations..........: 1
 Number of hessian evaluations...........: 0
-Total time in seconds...................: 0.000027
+Total time in seconds...................: 0.000113
 Subproblem time in seconds..............: 0.000000
 Line search time in seconds.............: 0.000000
 How many times subproblem failed........: 0
@@ -25,5 +25,5 @@ iter    f(x*)            ‖∇f(x*)‖         alpha            ‖d‖
 
 Objective.............: 0.000000e+00
 Gradient norm.........: 0.000000e+00
-Time..................: 2.687400e-05
+Time..................: 1.126150e-04
 EXIT: convergence has been achieved.

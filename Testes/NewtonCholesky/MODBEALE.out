@@ -1,29 +1,30 @@
 NewtonCholesky with backtrack line search.
 
-CUTEst problem................: BROWNBSNE
-Number of variables...........: 2
+CUTEst problem................: MODBEALE
+Number of variables...........: 20000
 Maximum problem iterations....: 1000
-Maximum subproblem iterations.: 2
+Maximum subproblem iterations.: 20000
 Maximum line search iterations: 1000
 Time limit....................: 10 min
 
-Total iterations........................: 0
-Subproblem iterations...................: 0
+Total iterations........................: 1
+Subproblem iterations...................: 200060000
 Line search iterations..................: 0
-Number of objective function evaluations: 0
+Number of objective function evaluations: 1
 Number of gradient evaluations..........: 1
-Number of hessian evaluations...........: 0
-Total time in seconds...................: 0.000027
-Subproblem time in seconds..............: 0.000000
-Line search time in seconds.............: 0.000000
+Number of hessian evaluations...........: 1
+Total time in seconds...................: 3678.559152
+Subproblem time in seconds..............: 3678.430606
+Line search time in seconds.............: 0.105945
 How many times subproblem failed........: 0
 How many times line search failed.......: 0
 
 ___________________________________________________________________________
 iter    f(x*)            ‖∇f(x*)‖         alpha            ‖d‖            
+1       1.264066e+07     3.068604e+05     1.000000e+00     1.090702e+02   
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 
-Objective.............: 0.000000e+00
-Gradient norm.........: 0.000000e+00
-Time..................: 2.687400e-05
-EXIT: convergence has been achieved.
+Objective.............: 1.264066e+07
+Gradient norm.........: 3.068604e+05
+Time..................: 3.678559e+03
+EXIT: time limit exceeded.

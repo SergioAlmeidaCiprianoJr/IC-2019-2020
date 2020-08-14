@@ -13,7 +13,7 @@ Line search iterations..................: 0
 Number of objective function evaluations: 0
 Number of gradient evaluations..........: 1
 Number of hessian evaluations...........: 0
-Total time in seconds...................: 0.000015
+Total time in seconds...................: 0.000029
 Subproblem time in seconds..............: 0.000000
 Line search time in seconds.............: 0.000000
 How many times subproblem failed........: 0
@@ -25,5 +25,5 @@ iter    f(x*)            ‖∇f(x*)‖         alpha            ‖d‖
 
 Objective.............: 0.000000e+00
 Gradient norm.........: 0.000000e+00
-Time..................: 1.486100e-05
+Time..................: 2.850500e-05
 EXIT: convergence has been achieved.

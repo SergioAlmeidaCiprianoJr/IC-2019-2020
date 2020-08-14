@@ -1,27 +1,27 @@
 NewtonCholesky with backtrack line search.
 
-CUTEst problem................: FREUROTH
+CUTEst problem................: SROSENBR
 Number of variables...........: 5000
 Maximum problem iterations....: 1000
 Maximum subproblem iterations.: 5000
 Maximum line search iterations: 1000
 Time limit....................: 10 min
 
-Total iterations........................: 11
-Subproblem iterations...................: 137665000
+Total iterations........................: 10
+Subproblem iterations...................: 125150000
 Line search iterations..................: 0
-Number of objective function evaluations: 11
-Number of gradient evaluations..........: 11
-Number of hessian evaluations...........: 11
-Total time in seconds...................: 606.640580
-Subproblem time in seconds..............: 606.615162
-Line search time in seconds.............: 0.009365
+Number of objective function evaluations: 10
+Number of gradient evaluations..........: 10
+Number of hessian evaluations...........: 10
+Total time in seconds...................: 600.376233
+Subproblem time in seconds..............: 600.354849
+Line search time in seconds.............: 0.003250
 How many times subproblem failed........: 0
 How many times line search failed.......: 0
 
 ___________________________________________________________________________
 iter    f(x*)            ‖∇f(x*)‖         alpha            ‖d‖            
-1       NaN              5.516237e+04     1.000000e+00     Inf            
+1       NaN              1.145846e+04     1.000000e+00     NaN            
 2       NaN              NaN              1.000000e+00     NaN            
 3       NaN              NaN              1.000000e+00     NaN            
 4       NaN              NaN              1.000000e+00     NaN            
@@ -31,10 +31,9 @@ iter    f(x*)            ‖∇f(x*)‖         alpha            ‖d‖
 8       NaN              NaN              1.000000e+00     NaN            
 9       NaN              NaN              1.000000e+00     NaN            
 10      NaN              NaN              1.000000e+00     NaN            
-11      NaN              NaN              1.000000e+00     NaN            
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 
 Objective.............: NaN
 Gradient norm.........: NaN
-Time..................: 6.066406e+02
+Time..................: 6.003762e+02
 EXIT: time limit exceeded.

@@ -1,0 +1,40 @@
+NewtonCholesky with backtrack line search.
+
+CUTEst problem................: POWELLSG
+Number of variables...........: 5000
+Maximum problem iterations....: 1000
+Maximum subproblem iterations.: 5000
+Maximum line search iterations: 1000
+Time limit....................: 10 min
+
+Total iterations........................: 11
+Subproblem iterations...................: 137665000
+Line search iterations..................: 0
+Number of objective function evaluations: 11
+Number of gradient evaluations..........: 11
+Number of hessian evaluations...........: 11
+Total time in seconds...................: 628.379434
+Subproblem time in seconds..............: 628.350976
+Line search time in seconds.............: 0.002948
+How many times subproblem failed........: 0
+How many times line search failed.......: 0
+
+___________________________________________________________________________
+iter    f(x*)            ‖∇f(x*)‖         alpha            ‖d‖            
+1       2.651002e+05     1.622020e+04     1.000000e+00     2.227001e+00   
+2       2.622620e+05     1.603000e+04     1.000000e+00     1.682683e+00   
+3       2.596172e+05     1.589427e+04     1.000000e+00     1.393162e+00   
+4       2.570459e+05     1.576818e+04     1.000000e+00     1.231739e+00   
+5       2.545160e+05     1.564544e+04     1.000000e+00     1.125975e+00   
+6       2.520136e+05     1.552429e+04     1.000000e+00     1.046784e+00   
+7       2.495312e+05     1.540393e+04     1.000000e+00     9.840389e-01   
+8       2.470638e+05     1.528389e+04     1.000000e+00     9.324993e-01   
+9       2.446083e+05     1.516389e+04     1.000000e+00     8.890585e-01   
+10      2.421626e+05     1.504371e+04     1.000000e+00     8.517219e-01   
+11      2.397249e+05     1.492322e+04     1.000000e+00     8.191347e-01   
+‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+
+Objective.............: 2.397249e+05
+Gradient norm.........: 1.492322e+04
+Time..................: 6.283794e+02
+EXIT: time limit exceeded.
