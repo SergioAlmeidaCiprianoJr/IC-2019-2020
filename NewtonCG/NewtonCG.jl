@@ -60,7 +60,7 @@ function newtoncg(nlp::AbstractNLPModel; tle = 10, e = 1e-8, itMAX = 1e3)
             fcnt+=1
             all∇f[it] = ∇fnorm
             allalpha[it] = alpha
-			allpnorm[it] = norm(p)
+			allpnorm[it] = sqrt(sum(p.*p))
             
             # time limit
             totaltime = (TimerOutputs.time(to["newton_modified"]["backtrack_line_search"]) +
@@ -113,8 +113,4 @@ function conjugategradient(r::Array, B::LinearOperator)
 	end
 	
 	return z, jMAX, 1
-end
-
-function norm(f)
-	sqrt(sum(f.*f))
 end

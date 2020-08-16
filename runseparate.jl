@@ -31,15 +31,15 @@ function printprobleminfo(nlp::AbstractNLPModel, info::Array, output::Array, fil
     @printf(file, "Line search time in seconds.............: %f\n", timeLS)
     @printf(file, "How many times line search failed.......: %d\n", output[11])
     @printf(file, "‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾\n\n")
+    @printf(file, "‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾ summary statistics ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾\n")
 
-    @printf(file, "‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾ summary statistics ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾\n")
     @printf(file, "Objective.............: %e\n", output[2])
     @printf(file, "Gradient norm.........: %e\n", output[3])
     @printf(file, "Total iterations......: %d\n", output[7])
     @printf(file, "Total time in seconds.: %f\n", totaltime)
-    @printf(file, "‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾\n")
+    @printf(file, "‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾\n")
 
-    println(file, repeat("_", 75))
+    println(file, repeat("_", 74))
     @printf(file, "%-6s  %-15s  %-15s  %-15s  %-15s\n",
             "iter", "f(x*)", "‖∇f(x*)‖", "alpha", "‖d‖")
     allobj = output[14][1]
@@ -50,7 +50,7 @@ function printprobleminfo(nlp::AbstractNLPModel, info::Array, output::Array, fil
         @printf(file, "%-6d  %-15e  %-15e  %-15e  %-15e\n",
                 i, allobj[i], norm(all∇f[i]), allalpha[i], allpnorm[i])
     end
-    println(file, repeat("‾", 75))
+    println(file, repeat("‾", 74))
 end
 
 norm(f) = sqrt(sum(f.*f))

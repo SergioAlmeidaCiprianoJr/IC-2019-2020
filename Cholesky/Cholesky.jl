@@ -21,7 +21,7 @@ function solvelinear(H, ∇f::Array)
 end
 
 function ldl(H)
-    # this routine computes the Cholesky factorization of
+    # this function computes the Cholesky factorization of
     # H + E = L D L^T
 
     # outputs
@@ -92,4 +92,26 @@ function solveforl(l::Array{Array{Float64,1},1}, b::Array, n::Integer, direction
         j=i
     end
     return x
+end
+
+function ldlproduct(n, lin, din, Ein, H)
+    # this function computes ldlt to test whether ldl function worked
+    l = zeros(n, n)
+    d = zeros(n, n)
+    E = zeros(n, n)
+
+    for j = 1:n
+        for i = j:n
+            l[i,j] = lin[i][j]
+        end
+    end
+
+    for i = 1:n
+        d[i,i] = din[i]
+        E[i,i] = Ein[i]
+        l[i,i] = 1
+    end
+
+    lt = transpose(l)
+    return l*d*lt, H+E
 end
