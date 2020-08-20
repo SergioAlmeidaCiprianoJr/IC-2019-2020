@@ -10,7 +10,7 @@ function printprobleminfo(nlp::AbstractNLPModel, info::Array, output::Array, fil
     @printf(file, "Maximum subproblem iterations.: %d\n", info[3])
     @printf(file, "Maximum line search iterations: %d\n", info[4])
     @printf(file, "Time limit....................: %s\n\n", info[5])
-
+    
     totaltime = TimerOutputs.time(output[13]["newton_modified"])/1e9
     timeSUB = timeLS = 0
     if output[7]!=0 # it!=0
@@ -19,6 +19,13 @@ function printprobleminfo(nlp::AbstractNLPModel, info::Array, output::Array, fil
         timeLS = TimerOutputs.time(
             output[13]["newton_modified"]["backtrack_line_search"])/1e9
     end
+
+    @printf(file, "‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾ summary statistics ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾\n")
+    @printf(file, "Objective.............: %e\n", output[2])
+    @printf(file, "Gradient norm.........: %e\n", output[3])
+    @printf(file, "Total iterations......: %d\n", output[7])
+    @printf(file, "Total time in seconds.: %f\n", totaltime)
+    @printf(file, "‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾\n\n")
 
     @printf(file, "‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾ output statistics ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾\n")
     @printf(file, "Number of objective function evaluations: %d\n", output[4])
@@ -30,18 +37,19 @@ function printprobleminfo(nlp::AbstractNLPModel, info::Array, output::Array, fil
     @printf(file, "Line search iterations..................: %d\n", output[9])
     @printf(file, "Line search time in seconds.............: %f\n", timeLS)
     @printf(file, "How many times line search failed.......: %d\n", output[11])
-    @printf(file, "‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾\n\n")
-    @printf(file, "‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾ summary statistics ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾\n")
-
-    @printf(file, "Objective.............: %e\n", output[2])
-    @printf(file, "Gradient norm.........: %e\n", output[3])
-    @printf(file, "Total iterations......: %d\n", output[7])
-    @printf(file, "Total time in seconds.: %f\n", totaltime)
-    @printf(file, "‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾\n")
+    @printf(file, "‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾\n\n")    
+    
+    @printf(file, "‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾ superscription ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾\n")
+    @printf(file, "iter....: current iteration\n")
+    @printf(file, "f(x*)...: objective function avaluated at x(iter)\n")
+    @printf(file, "‖∇f(x)‖.: gradient norm used to calculate x(iter), so x in ‖∇f(x)‖ is equal to x(iter-1)\n")
+    @printf(file, "alpha...: step calculated by backtrack line search\n")
+    @printf(file, "‖d‖.....: search direction norm\n")
+    @printf(file, "‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾\n")
 
     println(file, repeat("_", 74))
     @printf(file, "%-6s  %-15s  %-15s  %-15s  %-15s\n",
-            "iter", "f(x*)", "‖∇f(x*)‖", "alpha", "‖d‖")
+            "iter", "f(x*)", "‖∇f(x)‖", "alpha", "‖d‖")
     allobj = output[14][1]
     all∇f = output[14][2]
     allalpha = output[14][3]
@@ -51,32 +59,33 @@ function printprobleminfo(nlp::AbstractNLPModel, info::Array, output::Array, fil
                 i, allobj[i], norm(all∇f[i]), allalpha[i], allpnorm[i])
     end
     println(file, repeat("‾", 74))
+    println(file, output[13])
 end
 
 norm(f) = sqrt(sum(f.*f))
 
-function runcutest()
-    io = open("CUTEst/cp", "r")
+function runcutest(algorithm, file)
+    file = "CUTEst/$(file)"
+    io = open(file, "r")
 
-    #algorithm = "NewtonCG"
-    algorithm = "NewtonCholesky"
     info = [" ", 1000, 1000, 1000, "10 min"]
 
     for i = 1:80
         in = split(readline(io))
-        info[1] = in[1]
-        info[1] == "CHEBYQAD" ? nlp = CUTEstModel("CHEBYQAD", "-param", "N=10") :
-                                nlp = CUTEstModel(info[1])
-        if(algorithm == "NewtonCG")
+        info[1] = in[1] # problem name
+        println("Started $(info[1])")
+        nlp = CUTEstModel(info[1])
+
+        if algorithm == "NewtonCG"
             output = newtoncg(nlp)
-            file = open("Testes/NewtonCG/$(info[1]).out", "w")
-            @printf(file, "NewtonCG with backtrack line search.\n\n")
         else
             output = newtoncholesky(nlp)
-            file = open("Testes/NewtonCholesky/$(info[1]).out", "w")
-            @printf(file, "NewtonCholesky with backtrack line search.\n\n")
+            # subproblem iterations depend on n
             info[3] = nlp.meta.nvar
         end
+
+        println(file, "$(algorithm) with backtrack line search.\n")
+        file = open("Testes/$(algorithm)/$(info[1]).out", "w")
         
         if(output[12] == 0)
             EXIT = "convergence has been achieved."
@@ -87,13 +96,22 @@ function runcutest()
         end
         
         printprobleminfo(nlp, info, output, file)
-        @printf(file, "\nEXIT: %s\n", EXIT)
+        println(file, "\nEXIT: $(EXIT)\n")
         finalize(nlp)
         close(file)
-        println("Finished $(info[1])")
+        println("Finished $(info[1])\n")
         break
     end
     close(io)
 end
 
-runcutest()
+#algorithm = "NewtonCG"
+ algorithm = "NewtonCholesky"
+
+#file = "cp"
+ file = "mgh_ne"
+#file = "mgh_nls"
+#file = "mgh_problems"
+#file = "mgh_unmin"
+
+runcutest(algorithm, file)
