@@ -1,4 +1,6 @@
-using CUTEst, Printf, TimerOutputs
+using CUTEst
+using Printf
+using TimerOutputs
 
 include("./NewtonCG/NewtonCG.jl")
 include("./Cholesky/NewtonCholesky.jl")
@@ -60,58 +62,76 @@ function printprobleminfo(nlp::AbstractNLPModel, info::Array, output::Array, fil
     end
     println(file, repeat("‾", 74))
     println(file, output[13])
+
+    if(output[12] == 0)
+        EXIT = "convergence has been achieved."
+    elseif(output[12] == 1)
+        EXIT = "maximal number of iterations exceeded."
+    else
+        EXIT = "time limit exceeded."
+    end
+    println(file, "\nEXIT: $(EXIT)\n")
 end
 
 norm(f) = sqrt(sum(f.*f))
 
-function runcutest(algorithm, file)
-    file = "CUTEst/$(file)"
-    io = open(file, "r")
+function runseparate(algorithm, file, nproblem)
+    # file with all the input
+    io = open("CUTEst/$(file)", "r")
 
     info = [" ", 1000, 1000, 1000, "10 min"]
+    # info[1] -> CUTEst problem
+    # info[2] -> Maximum problem iterations
+    # info[3] -> Maximum subproblem iterations
+    # info[4] -> Maximum line search iterations
+    # info[5] -> Time limit
 
-    for i = 1:80
-        in = split(readline(io))
-        info[1] = in[1] # problem name
-        println("Started $(info[1])")
-        nlp = CUTEstModel(info[1])
+    # skip first line (it is a comment)
+    split(readline(io))
+    name = "empty"
+    number = n = m = 0
 
-        if algorithm == "NewtonCG"
-            output = newtoncg(nlp)
-        else
-            output = newtoncholesky(nlp)
-            # subproblem iterations depend on n
-            info[3] = nlp.meta.nvar
-        end
-
-        println(file, "$(algorithm) with backtrack line search.\n")
-        file = open("Testes/$(algorithm)/$(info[1]).out", "w")
-        
-        if(output[12] == 0)
-            EXIT = "convergence has been achieved."
-        elseif(output[12] == 1)
-            EXIT = "maximal number of iterations exceeded."
-        else
-            EXIT = "time limit exceeded."
-        end
-        
-        printprobleminfo(nlp, info, output, file)
-        println(file, "\nEXIT: $(EXIT)\n")
-        finalize(nlp)
-        close(file)
-        println("Finished $(info[1])\n")
-        break
+    while nproblem != number
+        name, number, n, m = split(readline(io))
+        number = parse(Int64, number)
+        n = parse(Int64, n)
+        m = parse(Int64, m)
     end
+
+    info[1] = name
+    println("Started $(info[1])")
+    
+    nlp = CUTEstModel(info[1])
+    if algorithm == "NewtonCG"
+        output = newtoncg(nlp)
+    else
+        output = newtoncholesky(nlp)
+        # subproblem iterations depend on n
+        info[3] = nlp.meta.nvar
+    end
+
+    out = open("Testes/$(algorithm)/$(file)/$(info[1]).out", "w")
+    println(out, "$(algorithm) with backtrack line search.\n")
+    printprobleminfo(nlp, info, output, out)
+
+    println("Finished $(info[1])")
+    # finalizing all processes
+    finalize(nlp)
+    close(out)
     close(io)
 end
 
 #algorithm = "NewtonCG"
  algorithm = "NewtonCholesky"
 
-#file = "cp"
- file = "mgh_ne"
+ file = "mgh_problems"
+#file = "mgh_ne"
 #file = "mgh_nls"
-#file = "mgh_problems"
 #file = "mgh_unmin"
 
-runcutest(algorithm, file)
+#nproblem = readline()
+#nproblem = parse(Int64, nproblem)
+
+for nproblem = 1:35
+    runseparate(algorithm, file, nproblem)
+end

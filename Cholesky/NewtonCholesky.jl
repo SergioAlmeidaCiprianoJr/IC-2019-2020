@@ -1,4 +1,6 @@
-using NLPModels, TimerOutputs
+using NLPModels
+using TimerOutputs
+
 include("../LineSearch/backtrack_line_search.jl")
 include("./Cholesky.jl")
 
@@ -56,18 +58,9 @@ function newtoncholesky(nlp::AbstractNLPModel; tle = 10, e = 1e-8, itMAX = 1e3)
 
             # saving data
             allobj[it] = obj(nlp, x)
-            fcnt+=1
             all∇f[it] = ∇fnorm
             allalpha[it] = alpha
-            allpnorm[it] = norm(p)
-            
-            # time limit
-            totaltime = (TimerOutputs.time(to["newton_modified"]["backtrack_line_search"]) +
-            TimerOutputs.time(to["newton_modified"]["linear_solver"]))/1e9
-            if totaltime >= tle*60 # minutes
-                stop = 2
-				break
-            end
+            allpnorm[it] = sqrt(sum(p.*p))
         end
     end
     values = [allobj, all∇f, allalpha, allpnorm]

@@ -31,9 +31,10 @@ function ldl(H)
 
     # local variables
     E = zeros(Float64, n)
+    perm = zeros(Float64, n)
     c = [zeros(_) for _ = 1:n]
 
-    # constants
+    # initialize constants
     γ = H[1,1] 
     ξ = H[1,n]
     for i = 1:n, j = 1:n
@@ -51,20 +52,30 @@ function ldl(H)
     δ = 1e-8
 
     for j = 1:n
+
+        # Computes the j-th row of L
         for s = 1:j-1
             l[j][s] = c[j][s]/d[s]
         end
-        _maxc = 0
+
+        # Find the maximum modulus of lij * dj
+        θ = 0
         for i = j+1:n
             _sum = 0
             for s = 1:j-1
                 _sum += l[j][s]*c[i][s]
             end
             c[i][j] = H[i,j] - _sum
-            _maxc < abs(c[i][j]) ? _maxc = abs(c[i][j]) : nothing
+            θ < abs(c[i][j]) ? θ = abs(c[i][j]) : nothing
         end
-        d[j] = maximum([δ, abs(c[j][j]), _maxc^2/ßsquared])
+
+        # Compute the j-th diagonal element of D
+        d[j] = maximum([δ, abs(c[j][j]), θ^2/ßsquared])
+
         E[j] = d[j] - c[j][j]
+
+        # Update the prospective diagonal elements
+        # and the column index
         for i = j+1:n
             c[i][i] -= c[i][j]^2/d[j]
         end
@@ -86,7 +97,7 @@ function solveforl(l::Array{Array{Float64,1},1}, b::Array, n::Integer, direction
     xj = j = 0
     for i = start:direction:finish
         if j>0
-            xj += x[j] * ( direction==1 ? l[i][j] : l[j][i] )
+            xj += x[j] * (direction==1 ? l[i][j] : l[j][i])
         end
         x[i] = b[i] - xj
         j=i
@@ -95,7 +106,8 @@ function solveforl(l::Array{Array{Float64,1},1}, b::Array, n::Integer, direction
 end
 
 function ldlproduct(n, lin, din, Ein, H)
-    # this function computes ldlt to test whether ldl function worked
+    # this function computes ldlt to test
+    # whether ldl function worked
     l = zeros(n, n)
     d = zeros(n, n)
     E = zeros(n, n)
