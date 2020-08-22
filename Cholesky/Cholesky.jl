@@ -31,7 +31,7 @@ function ldl(H)
 
     # local variables
     E = zeros(Float64, n)
-    perm = zeros(Float64, n)
+    perm = [i for i = 1:n]
     c = [zeros(_) for _ = 1:n]
 
     # initialize constants
@@ -52,32 +52,49 @@ function ldl(H)
     δ = 1e-8
 
     for j = 1:n
+        # Find the maximum diagonal value
+        cmax = q = 0
+        for i = j:n
+            if abs(c[i][i]) > cmax
+                q = i
+                cmax = abs(c[i][i])
+            end
+        end
+        # Perform row and column interchanges
+        perm[j] = q
+        perm[q] = j
+        
 
         # Computes the j-th row of L
         for s = 1:j-1
-            l[j][s] = c[j][s]/d[s]
+            l[j][s] = c[perm[j]][s]/d[s]
         end
 
         # Find the maximum modulus of lij * dj
         θ = 0
         for i = j+1:n
-            _sum = 0
+            sum = 0
             for s = 1:j-1
-                _sum += l[j][s]*c[i][s]
+                permi, perms = pos(perm[i], s)
+                sum += l[j][s]*c[permi][perms]
             end
-            c[i][j] = H[i,j] - _sum
-            θ < abs(c[i][j]) ? θ = abs(c[i][j]) : nothing
+
+            permi, permj = pos(perm[i], perm[j])
+            c[permi][permj] = H[permi, permj] - sum
+            cpos = c[permi][permj]
+            θ < abs(cpos) ? θ = abs(cpos) : nothing
         end
 
         # Compute the j-th diagonal element of D
-        d[j] = maximum([δ, abs(c[j][j]), θ^2/ßsquared])
+        d[j] = maximum([δ, abs(c[perm[j]][perm[j]]), θ^2/ßsquared])
 
-        E[j] = d[j] - c[j][j]
+        E[j] = d[j] - c[perm[j]][perm[j]]
 
         # Update the prospective diagonal elements
         # and the column index
         for i = j+1:n
-            c[i][i] -= c[i][j]^2/d[j]
+            permi, permj = pos(perm[i], perm[j])
+            c[perm[i]][perm[i]] -= c[permi][permj]^2/d[j]
         end
     end
 
@@ -103,6 +120,10 @@ function solveforl(l::Array{Array{Float64,1},1}, b::Array, n::Integer, direction
         j=i
     end
     return x
+end
+
+function pos(i, j)
+    i > j ? (return i, j) : (return j, i)
 end
 
 function ldlproduct(n, lin, din, Ein, H)
