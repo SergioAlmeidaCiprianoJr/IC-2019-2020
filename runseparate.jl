@@ -91,16 +91,18 @@ function runseparate(algorithm, file, nproblem)
     name = "empty"
     number = n = m = 0
 
+    # getting the problem by its number
     while nproblem != number
         name, number, n, m = split(readline(io))
         number = parse(Int64, number)
-        n = parse(Int64, n)
-        m = parse(Int64, m)
     end
+    n = parse(Int64, n)
+    m = parse(Int64, m)
 
     info[1] = name
     println("Started $(info[1])")
     
+    # run the algorithm
     nlp = CUTEstModel(info[1])
     if algorithm == "NewtonCG"
         output = newtoncg(nlp)
