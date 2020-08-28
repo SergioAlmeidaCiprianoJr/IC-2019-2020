@@ -11,7 +11,7 @@ Time limit....................: 10 min
 Objective.............: 2.499990e+11
 Gradient norm.........: 9.999980e+05
 Total iterations......: 1000
-Total time in seconds.: 0.012877
+Total time in seconds.: 0.016889
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾ output statistics ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
@@ -19,10 +19,10 @@ Number of objective function evaluations: 0
 Number of gradient evaluations..........: 1000
 Number of hessian evaluations...........: 1000
 Subproblem iterations...................: 8000
-Subproblem time in seconds..............: 0.006946
+Subproblem time in seconds..............: 0.009550
 How many times subproblem failed........: 0
 Line search iterations..................: 0
-Line search time in seconds.............: 0.002251
+Line search time in seconds.............: 0.002790
 How many times line search failed.......: 0
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 
@@ -1039,13 +1039,13 @@ iter    f(x*)            ‖∇f(x)‖          alpha            ‖d‖
  ──────────────────────────────────────────────────────────────────────────────
                                        Time                   Allocations      
                                ──────────────────────   ───────────────────────
-       Tot / % measured:           22.3ms / 57.8%           7.51MiB / 84.3%    
+       Tot / % measured:           25.4ms / 66.5%           8.07MiB / 85.4%    
 
  Section               ncalls     time   %tot     avg     alloc   %tot      avg
  ──────────────────────────────────────────────────────────────────────────────
- newton_modified            1   12.9ms   100%  12.9ms   6.33MiB  100%   6.33MiB
-   linear_solver        1.00k   6.95ms  53.9%  6.95μs   3.91MiB  61.7%  4.00KiB
-   backtrack_line_s...  1.00k   2.25ms  17.5%  2.25μs   1.14MiB  18.1%  1.17KiB
+ newton_modified            1   16.9ms   100%  16.9ms   6.89MiB  100%   6.89MiB
+   linear_solver        1.00k   9.55ms  56.5%  9.55μs   4.47MiB  64.9%  4.58KiB
+   backtrack_line_s...  1.00k   2.79ms  16.5%  2.79μs   1.14MiB  16.6%  1.17KiB
  ──────────────────────────────────────────────────────────────────────────────
 
 EXIT: maximal number of iterations exceeded.

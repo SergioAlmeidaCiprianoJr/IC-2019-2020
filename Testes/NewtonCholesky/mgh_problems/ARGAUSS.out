@@ -11,7 +11,7 @@ Time limit....................: 10 min
 Objective.............: 0.000000e+00
 Gradient norm.........: 0.000000e+00
 Total iterations......: 0
-Total time in seconds.: 0.000027
+Total time in seconds.: 0.000028
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾ output statistics ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
@@ -39,11 +39,11 @@ iter    f(x*)            ‖∇f(x)‖          alpha            ‖d‖
  ──────────────────────────────────────────────────────────────────────────
                                    Time                   Allocations      
                            ──────────────────────   ───────────────────────
-     Tot / % measured:          170μs / 15.8%           37.9KiB / 85.2%    
+     Tot / % measured:          194μs / 14.3%           37.9KiB / 85.2%    
 
  Section           ncalls     time   %tot     avg     alloc   %tot      avg
  ──────────────────────────────────────────────────────────────────────────
- newton_modified        1   26.9μs   100%  26.9μs   32.3KiB  100%   32.3KiB
+ newton_modified        1   27.8μs   100%  27.8μs   32.3KiB  100%   32.3KiB
  ──────────────────────────────────────────────────────────────────────────
 
 EXIT: convergence has been achieved.
