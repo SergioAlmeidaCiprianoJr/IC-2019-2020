@@ -2,22 +2,32 @@ using NLPModels
 
 function solvelinear(H, ∇f::Array)
     # Considering a system Ax = b,
-    # where A = H, x = goal, b = ∇f           
+    # where A = H, x = p = goal, b = -∇f          
     
     # Cholesky factorization
-    l, d, n = ldl(H)
+    l, d, n, perm = ldl(H)
 
-    # Lx = b, b = -∇f
-    x = solveforl(l, -∇f, n, 1)
+    # b = P b
+    b = zeros(Float64, n)
+    b[:] = -∇f[perm[:]]
 
-    # Dx* = x -> x* = D^-1x
+    # L x = b, b = -∇f
+    x = solvelowerl(l, b, n)
+
+    # D x* = x -> x* = D^-1 x
     for i=1:n
         x[i] /= d[i]
     end
     
-    # L^Tx = b, b = x*
+    # L^T x** = b, b = x*
+    x = solveupperl(l, x, n)
+
+    # p = P^T x**
+    p = zeros(Float64, n)
+    p[perm[:]] = x[:]
+
     # return search direction and total iterations
-    return solveforl(l, x, n, -1), n*(n/2) + 2*n + n
+    return p, n*(n/2) + 2*n + n
 end
 
 function ldl(H)
@@ -44,30 +54,31 @@ function ldl(H)
             γ < H[i,i] ? γ = H[i,i] : nothing
         else
             # Find the maximum off-diagonal value
-            ξ < H[i,j] && H[i,j]!=0 ? ξ = H[i,j] : nothing
+            ξ < H[i,j] ? ξ = H[i,j] : nothing
         end
     end
     ν = maximum([1, sqrt(n^2-1)])
-    ßsquared = maximum([γ, ξ/ν, eps()])
+    ß2 = maximum([γ, ξ/ν, eps()])
     δ = 1e-8
 
     for j = 1:n
         # Find the maximum diagonal value
-        cmax = q = 0
-        for i = j:n
-            if abs(c[i][i]) > cmax
-                q = i
-                cmax = abs(c[i][i])
+        cmax = c[perm[j]][perm[j]]
+        q = temp = perm[j]
+        for i = j+1:n
+            if abs(c[perm[i]][perm[i]]) > cmax
+                q = perm[i]
+                cmax = abs(c[q][q])
             end
         end
         # Perform row and column interchanges
-        perm[j] = q
-        perm[q] = j
-        
+        perm[j] = perm[q]
+        perm[q] = temp
 
         # Computes the j-th row of L
         for s = 1:j-1
-            l[j][s] = c[perm[j]][s]/d[s]
+            permj, perms = pos(perm[j], s)
+            l[j][s] = c[permj][perms]/d[s]
         end
 
         # Find the maximum modulus of lij * dj
@@ -86,7 +97,7 @@ function ldl(H)
         end
 
         # Compute the j-th diagonal element of D
-        d[j] = maximum([δ, abs(c[perm[j]][perm[j]]), θ^2/ßsquared])
+        d[j] = maximum([δ, abs(c[perm[j]][perm[j]]), θ^2/ß2])
 
         E[j] = d[j] - c[perm[j]][perm[j]]
 
@@ -98,26 +109,33 @@ function ldl(H)
         end
     end
 
-    return l, d, n, E
+    return l, d, n, perm, E
 end
 
-function solveforl(l::Array{Array{Float64,1},1}, b::Array, n::Integer, direction::Integer)
+function solvelowerl(l::Array{Array{Float64,1},1}, b::Array, n::Integer)
     # solve Lx = b and returns x
     # for L being a triangular matrix with unit diagonal
     x = zeros(Float64, n)
-    start = n
-    finish = 1
-    if direction==1
-        start = 1
-        finish = n
-    end
-    xj = j = 0
-    for i = start:direction:finish
-        if j>0
-            xj += x[j] * (direction==1 ? l[i][j] : l[j][i])
+    for i = 1:n
+        xj = 0
+        for j = 1:i-1
+            xj += x[j] * l[i][j]
         end
         x[i] = b[i] - xj
-        j=i
+    end
+    return x
+end
+
+function solveupperl(l::Array{Array{Float64,1},1}, b::Array, n::Integer)
+    # solve Lx = b and returns x
+    # for L being a triangular matrix with unit diagonal
+    x = zeros(Float64, n)
+    for i = n:-1:1
+        xj = 0
+        for j = i+1:n
+            xj += x[j] * l[j][i]
+        end
+        x[i] = b[i] - xj
     end
     return x
 end

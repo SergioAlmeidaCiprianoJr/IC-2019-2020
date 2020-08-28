@@ -65,5 +65,5 @@ function newtoncholesky(nlp::AbstractNLPModel; tle = 10, e = 1e-8, itMAX = 1e3)
     end
     values = [allobj, all∇f, allalpha, allpnorm]
     fcnt += itBLS
-	return [x, obj(nlp, x), ∇fnorm, fcnt, gcnt, hcnt, it, itSUB, itBLS, 0, BLSf, stop, to, values]
+    return [x, obj(nlp, x), ∇fnorm, fcnt, gcnt, hcnt, it, itSUB, itBLS, 0, BLSf, stop, to, values]
 end
