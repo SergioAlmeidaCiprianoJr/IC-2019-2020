@@ -136,4 +136,5 @@ end
 
 for nproblem = 1:35
     runseparate(algorithm, file, nproblem)
+    break
 end

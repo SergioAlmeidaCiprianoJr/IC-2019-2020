@@ -50,8 +50,6 @@ function runcutest()
         in = split(readline(io))
         problem = in[1]
         number = in[3]
-        problem == "CHEBYQAD" ? nlp = CUTEstModel("CHEBYQAD", "-param", "N=10") :
-                                nlp = CUTEstModel(problem)
         algorithm[1] == "NewtonCG" ? ans = newtoncg(nlp) :
                                      ans = newtoncholesky(nlp)
         printinf(ans, nlp, number)
