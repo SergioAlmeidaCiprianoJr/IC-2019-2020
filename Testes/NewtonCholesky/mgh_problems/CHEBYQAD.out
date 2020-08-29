@@ -11,7 +11,7 @@ Time limit....................: 10 min
 Objective.............: NaN
 Gradient norm.........: NaN
 Total iterations......: 1000
-Total time in seconds.: 1.319088
+Total time in seconds.: 0.113545
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾ output statistics ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
@@ -19,10 +19,10 @@ Number of objective function evaluations: 0
 Number of gradient evaluations..........: 1000
 Number of hessian evaluations...........: 1000
 Subproblem iterations...................: 80000
-Subproblem time in seconds..............: 0.949757
+Subproblem time in seconds..............: 0.079156
 How many times subproblem failed........: 0
 Line search iterations..................: 0
-Line search time in seconds.............: 0.256771
+Line search time in seconds.............: 0.013028
 How many times line search failed.......: 0
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 
@@ -35,7 +35,7 @@ alpha...: step calculated by backtrack line search
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 __________________________________________________________________________
 iter    f(x*)            ‖∇f(x)‖          alpha            ‖d‖            
-1       NaN              1.330073e+00     1.000000e+00     4.554955e-01   
+1       NaN              1.330073e+00     1.000000e+00     4.213449e+00   
 2       NaN              NaN              1.000000e+00     NaN            
 3       NaN              NaN              1.000000e+00     NaN            
 4       NaN              NaN              1.000000e+00     NaN            
@@ -1039,13 +1039,13 @@ iter    f(x*)            ‖∇f(x)‖          alpha            ‖d‖
  ──────────────────────────────────────────────────────────────────────────────
                                        Time                   Allocations      
                                ──────────────────────   ───────────────────────
-       Tot / % measured:            3.23s / 40.8%            173MiB / 39.5%    
+       Tot / % measured:            118ms / 96.2%           21.9MiB / 98.0%    
 
  Section               ncalls     time   %tot     avg     alloc   %tot      avg
  ──────────────────────────────────────────────────────────────────────────────
- newton_modified            1    1.32s   100%   1.32s   68.2MiB  100%   68.2MiB
-   linear_solver        1.00k    950ms  72.0%   950μs   47.8MiB  70.1%  48.9KiB
-   backtrack_line_s...  1.00k    257ms  19.5%   257μs   17.8MiB  26.1%  18.2KiB
+ newton_modified            1    114ms   100%   114ms   21.4MiB  100%   21.4MiB
+   linear_solver        1.00k   79.2ms  69.7%  79.2μs   18.3MiB  85.6%  18.8KiB
+   backtrack_line_s...  1.00k   13.0ms  11.5%  13.0μs   1.45MiB  6.77%  1.48KiB
  ──────────────────────────────────────────────────────────────────────────────
 
 EXIT: maximal number of iterations exceeded.
