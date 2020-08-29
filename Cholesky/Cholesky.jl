@@ -38,10 +38,10 @@ function ldl(H)
     n = size(H,1)
     l = [zeros(_) for _ = 1:n]
     d = zeros(Float64, n)
+    perm = [i for i = 1:n]
+    E = zeros(Float64, n)
 
     # local variables
-    E = zeros(Float64, n)
-    perm = [i for i = 1:n]
     c = [zeros(_) for _ = 1:n]
 
     # initialize constants
@@ -64,21 +64,22 @@ function ldl(H)
     for j = 1:n
         # Find the maximum diagonal value
         cmax = c[perm[j]][perm[j]]
-        q = temp = perm[j]
+        q = j
         for i = j+1:n
             if abs(c[perm[i]][perm[i]]) > cmax
-                q = perm[i]
-                cmax = abs(c[q][q])
+                q = i
+                cmax = abs(c[perm[i]][perm[i]])
             end
         end
         # Perform row and column interchanges
+        temp = perm[j]
         perm[j] = perm[q]
         perm[q] = temp
 
         # Computes the j-th row of L
         for s = 1:j-1
-            permj, perms = pos(perm[j], s)
-            l[j][s] = c[permj][perms]/d[s]
+            pj, ps = pos(perm[j], s)
+            l[j][s] = c[pj][ps]/d[s]
         end
 
         # Find the maximum modulus of lij * dj
@@ -86,14 +87,14 @@ function ldl(H)
         for i = j+1:n
             sum = 0
             for s = 1:j-1
-                permi, perms = pos(perm[i], s)
-                sum += l[j][s]*c[permi][perms]
+                pi, ps = pos(perm[i], s)
+                pj, pjs = pos(perm[j], s)
+                sum += l[j][s]*c[pi][ps]
             end
 
-            permi, permj = pos(perm[i], perm[j])
-            c[permi][permj] = H[permi, permj] - sum
-            cpos = c[permi][permj]
-            θ < abs(cpos) ? θ = abs(cpos) : nothing
+            pi, pj = pos(perm[i], perm[j])
+            c[pi][pj] = H[pi, pj] - sum
+            θ = maximum([c[pi][pj], θ])
         end
 
         # Compute the j-th diagonal element of D
@@ -104,8 +105,8 @@ function ldl(H)
         # Update the prospective diagonal elements
         # and the column index
         for i = j+1:n
-            permi, permj = pos(perm[i], perm[j])
-            c[perm[i]][perm[i]] -= c[permi][permj]^2/d[j]
+            pi, pj = pos(perm[i], perm[j])
+            c[perm[i]][perm[i]] -= c[pi][pj]^2/d[j]
         end
     end
 
