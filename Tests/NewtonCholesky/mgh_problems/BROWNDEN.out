@@ -1,0 +1,60 @@
+NewtonCholesky with backtrack line search.
+
+CUTEst problem................: BROWNDEN
+Number of variables...........: 4
+Maximum problem iterations....: 1000
+Maximum subproblem iterations.: 4
+Maximum line search iterations: 1000
+Time limit....................: 10 min
+
+‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾ summary statistics ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+Objective.............: 8.582220e+04
+Gradient norm.........: 4.057184e-10
+Total iterations......: 8
+Total time in seconds.: 0.001023
+‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+
+‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾ output statistics ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+Number of objective function evaluations: 0
+Number of gradient evaluations..........: 9
+Number of hessian evaluations...........: 8
+Subproblem iterations...................: 160
+Subproblem time in seconds..............: 0.000814
+How many times subproblem failed........: 0
+Line search iterations..................: 0
+Line search time in seconds.............: 0.000090
+How many times line search failed.......: 0
+‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+
+‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾ superscription ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+iter....: current iteration
+f(x*)...: objective function avaluated at x(iter)
+‖∇f(x)‖.: gradient norm used to calculate x(iter), so x in ‖∇f(x)‖ is equal to x(iter-1)
+alpha...: step calculated by backtrack line search
+‖d‖.....: search direction norm
+‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+__________________________________________________________________________
+iter    f(x*)            ‖∇f(x)‖          alpha            ‖d‖            
+1       1.711744e+06     2.140491e+06     1.000000e+00     1.020553e+01   
+2       4.981953e+05     5.983803e+05     1.000000e+00     8.437727e+00   
+3       2.034705e+05     1.538078e+05     1.000000e+00     7.970127e+00   
+4       9.511980e+04     4.725003e+04     1.000000e+00     8.837978e+00   
+5       8.605653e+04     1.743618e+04     1.000000e+00     2.897357e+00   
+6       8.582226e+04     2.007402e+03     1.000000e+00     4.306309e-01   
+7       8.582220e+04     2.037232e+01     1.000000e+00     6.036619e-03   
+8       8.582220e+04     3.873967e-03     1.000000e+00     1.570795e-06   
+‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+ ──────────────────────────────────────────────────────────────────────────────
+                                       Time                   Allocations      
+                               ──────────────────────   ───────────────────────
+       Tot / % measured:           1.24ms / 82.9%            130KiB / 88.4%    
+
+ Section               ncalls     time   %tot     avg     alloc   %tot      avg
+ ──────────────────────────────────────────────────────────────────────────────
+ newton_modified            1   1.02ms   100%  1.02ms    115KiB  100%    115KiB
+   linear_solver            8    814μs  79.5%   102μs   59.8KiB  52.2%  7.47KiB
+   backtrack_line_s...      8   90.4μs  8.83%  11.3μs   10.0KiB  8.72%  1.25KiB
+ ──────────────────────────────────────────────────────────────────────────────
+
+EXIT: convergence has been achieved.
+
