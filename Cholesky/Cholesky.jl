@@ -8,13 +8,13 @@ function solvelinear(H, ∇f::Array)
     l, d, n, perm = ldl(H)
 
     # b = P b
-    b = zeros(Float64, n)
+    p = b = zeros(Float64, n)
     b[:] = -∇f[perm[:]]
 
     # L x = b, b = -∇f
     x = solvelowerl(l, b, n)
 
-    # D x* = x -> x* = D^-1 x
+    # D x* = x  ->  x* = D^-1 x
     for i=1:n
         x[i] /= d[i]
     end
@@ -22,8 +22,7 @@ function solvelinear(H, ∇f::Array)
     # L^T x** = b, b = x*
     x = solveupperl(l, x, n)
 
-    # p = P^T x**
-    p = zeros(Float64, n)
+    # p = P^T x
     p[perm[:]] = x[:]
 
     # return search direction and total iterations
@@ -36,20 +35,20 @@ function ldl(H)
 
     # outputs
     n = size(H,1)
-    l = [zeros(_) for _ = 1:n]
+    l = zeros(Float64, trunc(Int, n*(n-1)/2))
     d = zeros(Float64, n)
     perm = [i for i = 1:n]
-    E = zeros(Float64, n)
 
-    # local variables
-    c = [zeros(_) for _ = 1:n]
+    # local arrays
+    c = zeros(Float64, trunc(Int, n*(n-1)/2))
+    cd = zeros(Float64, n)
 
     # initialize constants
-    γ = H[1,1] 
+    γ = H[1,1]
     ξ = H[1,n]
     for i = 1:n, j = 1:n
         if i == j
-            c[i][i] = H[i,i]
+            cd[i] = H[i,i]
             # Find the maximum diagonal value
             γ < H[i,i] ? γ = H[i,i] : nothing
         else
@@ -63,12 +62,12 @@ function ldl(H)
 
     for j = 1:n
         # Find the maximum diagonal value
-        cmax = c[perm[j]][perm[j]]
+        cmax = cd[perm[j]]
         q = j
         for i = j+1:n
-            if abs(c[perm[i]][perm[i]]) > cmax
+            if abs(cd[perm[i]]) > cmax
                 q = i
-                cmax = abs(c[perm[i]][perm[i]])
+                cmax = abs(cd[perm[i]])
             end
         end
         # Perform row and column interchanges
@@ -78,8 +77,7 @@ function ldl(H)
 
         # Computes the j-th row of L
         for s = 1:j-1
-            pj, ps = pos(perm[j], s)
-            l[j][s] = c[pj][ps]/d[s]
+            l[pos(j, s)] = c[pos(perm[j], perm[s])] / d[s]
         end
 
         # Find the maximum modulus of lij * dj
@@ -87,54 +85,51 @@ function ldl(H)
         for i = j+1:n
             sum = 0
             for s = 1:j-1
-                pi, ps = pos(perm[i], s)
-                pj, pjs = pos(perm[j], s)
-                sum += l[j][s]*c[pi][ps]
+                sum += l[pos(j, s)] * c[pos(perm[i], perm[s])]
             end
 
-            pi, pj = pos(perm[i], perm[j])
-            c[pi][pj] = H[pi, pj] - sum
-            θ = maximum([c[pi][pj], θ])
+            cpos = pos(perm[i], perm[j])
+            pi, pj = igtj(perm[i], perm[j])
+
+            c[cpos] = H[pi, pj] - sum
+            θ = maximum([c[cpos], θ])
         end
 
         # Compute the j-th diagonal element of D
-        d[j] = maximum([δ, abs(c[perm[j]][perm[j]]), θ^2/ß2])
-
-        E[j] = d[j] - c[perm[j]][perm[j]]
+        d[j] = maximum([δ, abs(cd[perm[j]]), θ^2/ß2])
 
         # Update the prospective diagonal elements
         # and the column index
         for i = j+1:n
-            pi, pj = pos(perm[i], perm[j])
-            c[perm[i]][perm[i]] -= c[pi][pj]^2/d[j]
+            cd[perm[i]] -= c[pos(perm[i], perm[j])]^2/d[j]
         end
     end
 
-    return l, d, n, perm, E
+    return l, d, n, perm
 end
 
-function solvelowerl(l::Array{Array{Float64,1},1}, b::Array, n::Integer)
+function solvelowerl(l::Array{Float64,1}, b::Array, n::Integer)
     # solve Lx = b and returns x
     # for L being a triangular matrix with unit diagonal
     x = zeros(Float64, n)
     for i = 1:n
         xj = 0
         for j = 1:i-1
-            xj += x[j] * l[i][j]
+            xj += x[j] * l[pos(i, j)]
         end
         x[i] = b[i] - xj
     end
     return x
 end
 
-function solveupperl(l::Array{Array{Float64,1},1}, b::Array, n::Integer)
+function solveupperl(l::Array{Float64,1}, b::Array, n::Integer)
     # solve Lx = b and returns x
     # for L being a triangular matrix with unit diagonal
     x = zeros(Float64, n)
     for i = n:-1:1
         xj = 0
         for j = i+1:n
-            xj += x[j] * l[j][i]
+            xj += x[j] * l[pos(j, i)]
         end
         x[i] = b[i] - xj
     end
@@ -142,28 +137,10 @@ function solveupperl(l::Array{Array{Float64,1},1}, b::Array, n::Integer)
 end
 
 function pos(i, j)
-    i > j ? (return i, j) : (return j, i)
+    i, j = igtj(i, j)
+    return trunc(Int, (i-1) * (i-2) / 2 + j)
 end
 
-function ldlproduct(n, lin, din, Ein, H)
-    # this function computes ldlt to test
-    # whether ldl function worked
-    l = zeros(n, n)
-    d = zeros(n, n)
-    E = zeros(n, n)
-
-    for j = 1:n
-        for i = j:n
-            l[i,j] = lin[i][j]
-        end
-    end
-
-    for i = 1:n
-        d[i,i] = din[i]
-        E[i,i] = Ein[i]
-        l[i,i] = 1
-    end
-
-    lt = transpose(l)
-    return l*d*lt, H+E
+function igtj(i, j)
+    i > j ? (return i, j) : (return j, i)
 end
