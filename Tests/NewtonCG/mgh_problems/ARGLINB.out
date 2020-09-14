@@ -11,18 +11,18 @@ Time limit....................: 10 min
 Objective.............: 9.962547e+01
 Gradient norm.........: 1.179721e-01
 Total iterations......: 1000
-Total time in seconds.: 2.263058
+Total time in seconds.: 2.129219
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾ output statistics ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-Number of objective function evaluations: 9986
+Number of objective function evaluations: 8986
 Number of gradient evaluations..........: 1000
 Number of hessian evaluations...........: 1000
 Subproblem iterations...................: 1000
-Subproblem time in seconds..............: 0.574912
+Subproblem time in seconds..............: 0.537278
 How many times subproblem failed........: 0
 Line search iterations..................: 8986
-Line search time in seconds.............: 1.221124
+Line search time in seconds.............: 1.160781
 How many times line search failed.......: 0
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 
@@ -1039,13 +1039,13 @@ iter    f(x*)            ‖∇f(x)‖          alpha            ‖d‖
  ──────────────────────────────────────────────────────────────────────────────
                                        Time                   Allocations      
                                ──────────────────────   ───────────────────────
-       Tot / % measured:            2.27s / 100%            92.4MiB / 98.7%    
+       Tot / % measured:            2.14s / 100%            92.4MiB / 98.7%    
 
  Section               ncalls     time   %tot     avg     alloc   %tot      avg
  ──────────────────────────────────────────────────────────────────────────────
- newton_modified            1    2.26s   100%   2.26s   91.3MiB  100%   91.3MiB
-   backtrack_line_s...  1.00k    1.22s  54.0%  1.22ms   59.0MiB  64.6%  60.4KiB
-   linear_solver        1.00k    575ms  25.4%   575μs   21.1MiB  23.2%  21.6KiB
+ newton_modified            1    2.13s   100%   2.13s   91.3MiB  100%   91.3MiB
+   backtrack_line_s...  1.00k    1.16s  54.5%  1.16ms   59.0MiB  64.6%  60.4KiB
+   linear_solver        1.00k    537ms  25.2%   537μs   21.1MiB  23.2%  21.6KiB
  ──────────────────────────────────────────────────────────────────────────────
 
 EXIT: maximal number of iterations exceeded.

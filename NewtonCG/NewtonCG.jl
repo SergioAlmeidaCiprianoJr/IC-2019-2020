@@ -65,7 +65,8 @@ function newtoncg(nlp::AbstractNLPModel; tle = 10, e = 1e-8, itMAX = 1e3)
 	end
     values = [allobj, all∇f, allalpha, allpnorm]
 	fcnt += itBLS
-	return [x, obj(nlp, x), ∇fnorm, fcnt, gcnt, hcnt, it, itSUB, itBLS, SUBf, BLSf, stop, to, values]
+	return [x, obj(nlp, x), ∇fnorm, fcnt, gcnt,
+			hcnt, it, itSUB, itBLS, SUBf, BLSf, stop, to, values]
 end
 
 function conjugategradient(r::Array, B::LinearOperator)
@@ -99,7 +100,7 @@ function conjugategradient(r::Array, B::LinearOperator)
 		end
 
 		ß = rip/ripold
-		d = r + ß*d
+		d = r + ß.*d
 
 		ripold = rip
 	end

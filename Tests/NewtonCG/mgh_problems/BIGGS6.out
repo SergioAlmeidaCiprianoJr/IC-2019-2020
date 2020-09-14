@@ -11,18 +11,18 @@ Time limit....................: 10 min
 Objective.............: 2.537704e-01
 Gradient norm.........: 5.718498e-02
 Total iterations......: 1000
-Total time in seconds.: 0.023450
+Total time in seconds.: 0.022054
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾ output statistics ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-Number of objective function evaluations: 1000
+Number of objective function evaluations: 0
 Number of gradient evaluations..........: 1000
 Number of hessian evaluations...........: 1000
 Subproblem iterations...................: 1011
-Subproblem time in seconds..............: 0.007205
+Subproblem time in seconds..............: 0.006761
 How many times subproblem failed........: 0
 Line search iterations..................: 0
-Line search time in seconds.............: 0.005538
+Line search time in seconds.............: 0.005212
 How many times line search failed.......: 0
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 
@@ -1039,13 +1039,13 @@ iter    f(x*)            ‖∇f(x)‖          alpha            ‖d‖
  ──────────────────────────────────────────────────────────────────────────────
                                        Time                   Allocations      
                                ──────────────────────   ───────────────────────
-       Tot / % measured:           31.3ms / 74.8%           5.34MiB / 77.9%    
+       Tot / % measured:           29.8ms / 73.9%           5.34MiB / 77.9%    
 
  Section               ncalls     time   %tot     avg     alloc   %tot      avg
  ──────────────────────────────────────────────────────────────────────────────
- newton_modified            1   23.5ms   100%  23.5ms   4.16MiB  100%   4.16MiB
-   linear_solver        1.00k   7.20ms  30.7%  7.20μs   1.32MiB  31.8%  1.35KiB
-   backtrack_line_s...  1.00k   5.54ms  23.6%  5.54μs   1.30MiB  31.2%  1.33KiB
+ newton_modified            1   22.1ms   100%  22.1ms   4.16MiB  100%   4.16MiB
+   linear_solver        1.00k   6.76ms  30.7%  6.76μs   1.32MiB  31.8%  1.35KiB
+   backtrack_line_s...  1.00k   5.21ms  23.6%  5.21μs   1.30MiB  31.2%  1.33KiB
  ──────────────────────────────────────────────────────────────────────────────
 
 EXIT: maximal number of iterations exceeded.

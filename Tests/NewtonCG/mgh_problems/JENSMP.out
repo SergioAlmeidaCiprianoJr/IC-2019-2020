@@ -11,18 +11,18 @@ Time limit....................: 10 min
 Objective.............: 1.243622e+02
 Gradient norm.........: 2.698798e-07
 Total iterations......: 1000
-Total time in seconds.: 0.055994
+Total time in seconds.: 0.056999
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾ output statistics ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-Number of objective function evaluations: 21678
+Number of objective function evaluations: 20678
 Number of gradient evaluations..........: 1000
 Number of hessian evaluations...........: 1000
 Subproblem iterations...................: 1992
-Subproblem time in seconds..............: 0.007973
+Subproblem time in seconds..............: 0.007753
 How many times subproblem failed........: 0
 Line search iterations..................: 20678
-Line search time in seconds.............: 0.040699
+Line search time in seconds.............: 0.042060
 How many times line search failed.......: 0
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 
@@ -1039,13 +1039,13 @@ iter    f(x*)            ‖∇f(x)‖          alpha            ‖d‖
  ──────────────────────────────────────────────────────────────────────────────
                                        Time                   Allocations      
                                ──────────────────────   ───────────────────────
-       Tot / % measured:           63.9ms / 87.6%           19.5MiB / 93.9%    
+       Tot / % measured:           66.7ms / 85.4%           19.5MiB / 93.9%    
 
  Section               ncalls     time   %tot     avg     alloc   %tot      avg
  ──────────────────────────────────────────────────────────────────────────────
- newton_modified            1   56.0ms   100%  56.0ms   18.3MiB  100%   18.3MiB
-   backtrack_line_s...  1.00k   40.7ms  72.7%  40.7μs   14.1MiB  77.0%  14.4KiB
-   linear_solver        1.00k   7.97ms  14.2%  7.97μs   2.84MiB  15.5%  2.91KiB
+ newton_modified            1   57.0ms   100%  57.0ms   18.3MiB  100%   18.3MiB
+   backtrack_line_s...  1.00k   42.1ms  73.8%  42.1μs   14.1MiB  77.0%  14.4KiB
+   linear_solver        1.00k   7.75ms  13.6%  7.75μs   2.84MiB  15.5%  2.91KiB
  ──────────────────────────────────────────────────────────────────────────────
 
 EXIT: maximal number of iterations exceeded.

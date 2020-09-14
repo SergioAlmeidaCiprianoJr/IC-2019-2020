@@ -112,7 +112,7 @@ function runseparate(algorithm, file, nproblem)
         info[3] = nlp.meta.nvar
     end
 
-    out = open("Testes/$(algorithm)/$(file)/$(info[1]).out", "w")
+    out = open("Tests/$(algorithm)/$(file)/$(info[1]).out", "w")
     println(out, "$(algorithm) with backtrack line search.\n")
     printprobleminfo(nlp, info, output, out)
 
@@ -123,8 +123,8 @@ function runseparate(algorithm, file, nproblem)
     close(io)
 end
 
-#algorithm = "NewtonCG"
- algorithm = "NewtonCholesky"
+ algorithm = "NewtonCG"
+#algorithm = "NewtonCholesky"
 
  file = "mgh_problems"
 #file = "mgh_ne"
