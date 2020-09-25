@@ -11,7 +11,7 @@ Time limit....................: 10 min
 Objective.............: 1.640346e-26
 Gradient norm.........: 5.032557e-12
 Total iterations......: 14
-Total time in seconds.: 0.000193
+Total time in seconds.: 0.000200
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾ output statistics ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
@@ -19,10 +19,10 @@ Number of objective function evaluations: 0
 Number of gradient evaluations..........: 15
 Number of hessian evaluations...........: 14
 Subproblem iterations...................: 14
-Subproblem time in seconds..............: 0.000042
+Subproblem time in seconds..............: 0.000047
 How many times subproblem failed........: 0
 Line search iterations..................: 0
-Line search time in seconds.............: 0.000045
+Line search time in seconds.............: 0.000041
 How many times line search failed.......: 0
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 
@@ -53,13 +53,13 @@ iter    f(x*)            ‖∇f(x)‖          alpha            ‖d‖
  ──────────────────────────────────────────────────────────────────────────────
                                        Time                   Allocations      
                                ──────────────────────   ───────────────────────
-       Tot / % measured:            462μs / 41.7%            134KiB / 83.4%    
+       Tot / % measured:            493μs / 40.5%            131KiB / 83.2%    
 
  Section               ncalls     time   %tot     avg     alloc   %tot      avg
  ──────────────────────────────────────────────────────────────────────────────
- newton_modified            1    193μs   100%   193μs    111KiB  100%    111KiB
-   backtrack_line_s...     14   45.0μs  23.4%  3.22μs   20.8KiB  18.6%  1.48KiB
-   linear_solver           14   42.5μs  22.0%  3.03μs   32.6KiB  29.2%  2.33KiB
+ newton_modified            1    200μs   100%   200μs    109KiB  100%    109KiB
+   linear_solver           14   47.2μs  23.6%  3.37μs   30.4KiB  27.8%  2.17KiB
+   backtrack_line_s...     14   41.0μs  20.6%  2.93μs   20.8KiB  19.0%  1.48KiB
  ──────────────────────────────────────────────────────────────────────────────
 
 EXIT: convergence has been achieved.

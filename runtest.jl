@@ -20,7 +20,7 @@ function printheader(algorithm::Array)
     @printf("         1 maximal number of iterations exceeded.\n")
     @printf("         2 time limit exceeded.\n")
     
-    println(repeat("_", 250))
+    println(repeat("_", 260))
     @printf("%-10s  %-6s  %-5s  %-5s  %-15s  %-15s  %-15s  %-15s  %-15s  %-15s  %-15s  %-15s  %-15s  %-15s  %-15s  %-15s  %-15s  %-15s\n",
             "Problem", "number", "n", "ncon", "f(x*)", "‖∇f(x*)‖",
             "fcnt", "gcnt", "hcnt", "it", "itSUB",
@@ -42,23 +42,25 @@ function printinf(ans, nlp::AbstractNLPModel, number::SubString)
 end
 
 function runcutest()
-    io = open("CUTEst/cp", "r")
-    algorithm = ["NewtonCholesky", "Cholesky", "backtrack line search"]
-    #algorithm = ["NewtonCG", "Conjugate Gradients", "backtrack line search"]
+    io = open("CUTEst/mgh_problems", "r")
+    #algorithm = ["NewtonCholesky", "Cholesky", "backtrack line search"]
+    algorithm = ["NewtonCG", "Conjugate Gradients", "backtrack line search"]
     printheader(algorithm)
-    for i = 1:80
+    for i = 1:36
         in = split(readline(io))
+        if i == 1
+            continue
+        end
         problem = in[1]
-        number = in[3]
+        number = in[2]
+        nlp = CUTEstModel(problem)
         algorithm[1] == "NewtonCG" ? ans = newtoncg(nlp) :
                                      ans = newtoncholesky(nlp)
         printinf(ans, nlp, number)
         finalize(nlp)
-        break
     end
-    println(repeat("‾", 250))
+    println(repeat("‾", 260))
     close(io)
-
 end
 
-#runcutest()
+runcutest()

@@ -33,17 +33,18 @@ function newtoncg(nlp::AbstractNLPModel; tle = 10, e = 1e-8, itMAX = 1e3)
 		allalpha = zeros(Float64, Integer(itMAX))
 		allpnorm = zeros(Float64, Integer(itMAX))
 
-        ∇f = ∇fnorm = 0
+		∇f = ∇fnorm = 0
         x = nlp.meta.x0
-		while it<itMAX 
+		while it<itMAX
+			# stop criteria
 			∇f = grad(nlp, x)
 			∇fnorm = sqrt(sum(∇f.*∇f))
             gcnt += 1
             if ∇fnorm < e
                 stop = 0
                 break
-            end
-			
+			end
+
 			p, j, failure = @timeit to "linear_solver" conjugategradient(-∇f, hess_op(nlp, x))
 			itSUB += j
 			hcnt += 1
@@ -80,7 +81,7 @@ function conjugategradient(r::Array, B::LinearOperator)
 	jMAX = 1000
 	for j = 1:jMAX
 		Bd = B*d
-		dBd = sum(d.*Bd)
+		dBd = sum(transpose(d)*Bd)
 		if dBd <= 0
 			if j == 0
 				return d, j, 0

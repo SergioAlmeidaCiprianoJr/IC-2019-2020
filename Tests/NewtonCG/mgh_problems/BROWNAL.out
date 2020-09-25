@@ -11,7 +11,7 @@ Time limit....................: 10 min
 Objective.............: 6.825483e-26
 Gradient norm.........: 6.751915e-13
 Total iterations......: 7
-Total time in seconds.: 0.000156
+Total time in seconds.: 0.000161
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾ output statistics ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
@@ -22,7 +22,7 @@ Subproblem iterations...................: 13
 Subproblem time in seconds..............: 0.000053
 How many times subproblem failed........: 0
 Line search iterations..................: 0
-Line search time in seconds.............: 0.000024
+Line search time in seconds.............: 0.000025
 How many times line search failed.......: 0
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 
@@ -46,13 +46,13 @@ iter    f(x*)            ‖∇f(x)‖          alpha            ‖d‖
  ──────────────────────────────────────────────────────────────────────────────
                                        Time                   Allocations      
                                ──────────────────────   ───────────────────────
-       Tot / % measured:            376μs / 41.5%           98.8KiB / 86.0%    
+       Tot / % measured:            391μs / 41.3%           96.7KiB / 85.7%    
 
  Section               ncalls     time   %tot     avg     alloc   %tot      avg
  ──────────────────────────────────────────────────────────────────────────────
- newton_modified            1    156μs   100%   156μs   85.0KiB  100%   85.0KiB
-   linear_solver            7   52.5μs  33.7%  7.50μs   28.5KiB  33.5%  4.07KiB
-   backtrack_line_s...      7   24.3μs  15.5%  3.47μs   10.4KiB  12.2%  1.48KiB
+ newton_modified            1    161μs   100%   161μs   82.9KiB  100%   82.9KiB
+   linear_solver            7   53.5μs  33.1%  7.64μs   26.5KiB  31.9%  3.78KiB
+   backtrack_line_s...      7   25.1μs  15.6%  3.59μs   10.4KiB  12.5%  1.48KiB
  ──────────────────────────────────────────────────────────────────────────────
 
 EXIT: convergence has been achieved.
