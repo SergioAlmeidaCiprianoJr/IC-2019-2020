@@ -63,7 +63,7 @@ function printprobleminfo(nlp::AbstractNLPModel, info::Array, output::Array, fil
     println(file, repeat("‾", 74))
     println(file, output[13])
 
-    if(output[12] == 0)
+    if(output[12] == 2)
         EXIT = "convergence has been achieved."
     elseif(output[12] == 1)
         EXIT = "maximal number of iterations exceeded."
@@ -123,8 +123,8 @@ function runseparate(algorithm, file, nproblem)
     close(io)
 end
 
- algorithm = "NewtonCG"
-#algorithm = "NewtonCholesky"
+algorithm = "NewtonCG"
+ algorithm = "NewtonCholesky"
 
  file = "mgh_problems"
 #file = "mgh_ne"
@@ -134,6 +134,6 @@ end
 #nproblem = readline()
 #nproblem = parse(Int64, nproblem)
 
-for nproblem = 1:35
+for nproblem = 22:22
     runseparate(algorithm, file, nproblem)
 end
