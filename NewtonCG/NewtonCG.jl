@@ -41,7 +41,7 @@ function newtoncg(nlp::AbstractNLPModel; tle = 10, e = 1e-8, itMAX = 1e3)
 			∇fnorm = sqrt(sum(∇f.*∇f))
             gcnt += 1
             if ∇fnorm < e
-                stop = 0
+                stop = 2
                 break
 			end
 

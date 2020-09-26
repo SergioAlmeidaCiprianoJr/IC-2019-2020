@@ -41,7 +41,7 @@ function newtoncholesky(nlp::AbstractNLPModel; tle = 10, e = 1e-8, itMAX = 1e3)
 			∇fnorm = sqrt(sum(∇f.*∇f))
             gcnt += 1
             if ∇fnorm < e
-                stop = 0
+                stop = 2
                 break
             end
             
@@ -61,6 +61,14 @@ function newtoncholesky(nlp::AbstractNLPModel; tle = 10, e = 1e-8, itMAX = 1e3)
             all∇f[it] = ∇fnorm
             allalpha[it] = alpha
             allpnorm[it] = sqrt(sum(p.*p))
+
+            # time limit
+            totaltime = (TimerOutputs.time(to["newton_modified"]["backtrack_line_search"]) +
+            TimerOutputs.time(to["newton_modified"]["linear_solver"]))/1e9
+            if totaltime >= tle*60 # minutes
+                stop = 3
+				break
+            end
         end
     end
     values = [allobj, all∇f, allalpha, allpnorm]
