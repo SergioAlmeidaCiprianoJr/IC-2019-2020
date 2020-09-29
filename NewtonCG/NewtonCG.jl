@@ -83,7 +83,7 @@ function conjugategradient(r::Array, B::LinearOperator)
 		Bd = B*d
 		dBd = sum(transpose(d)*Bd)
 		if dBd <= 0
-			if j == 0
+			if j == 1
 				return d, j, 0
 			else
 				return z, j, 0

@@ -124,7 +124,7 @@ function runseparate(algorithm, file, nproblem)
 end
 
 algorithm = "NewtonCG"
- algorithm = "NewtonCholesky"
+#algorithm = "NewtonCholesky"
 
  file = "mgh_problems"
 #file = "mgh_ne"
@@ -134,6 +134,6 @@ algorithm = "NewtonCG"
 #nproblem = readline()
 #nproblem = parse(Int64, nproblem)
 
-for nproblem = 22:22
+for nproblem = 1:35
     runseparate(algorithm, file, nproblem)
 end
