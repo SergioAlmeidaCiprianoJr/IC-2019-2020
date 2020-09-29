@@ -1,28 +1,28 @@
 NewtonCholesky with backtrack line search.
 
 CUTEst problem................: SROSENBR
-Number of variables...........: 10
+Number of variables...........: 500
 Maximum problem iterations....: 1000
-Maximum subproblem iterations.: 10
+Maximum subproblem iterations.: 500
 Maximum line search iterations: 1000
 Time limit....................: 10 min
 
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾ summary statistics ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-Objective.............: 6.603577e-25
-Gradient norm.........: 3.546281e-11
+Objective.............: 3.301788e-23
+Gradient norm.........: 2.507599e-10
 Total iterations......: 8
-Total time in seconds.: 0.001376
+Total time in seconds.: 3.828641
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾ output statistics ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 Number of objective function evaluations: 1
 Number of gradient evaluations..........: 9
 Number of hessian evaluations...........: 8
-Subproblem iterations...................: 640
-Subproblem time in seconds..............: 0.001252
+Subproblem iterations...................: 1012000
+Subproblem time in seconds..............: 3.293845
 How many times subproblem failed........: 0
 Line search iterations..................: 1
-Line search time in seconds.............: 0.000040
+Line search time in seconds.............: 0.424282
 How many times line search failed.......: 0
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 
@@ -35,25 +35,25 @@ alpha...: step calculated by backtrack line search
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
 __________________________________________________________________________
 iter    f(x*)            ‖∇f(x)‖          alpha            ‖d‖            
-1       1.955309e-01     5.124381e+02     1.000000e+00     9.718232e-01   
-2       9.660386e-02     8.897902e-01     5.000000e-01     1.146688e+00   
-3       2.204799e-02     1.094362e+01     1.000000e+00     1.614361e-01   
-4       4.797137e-03     1.453775e+00     1.000000e+00     2.789604e-01   
-5       9.705104e-05     2.930709e+00     1.000000e+00     3.300367e-02   
-6       1.862791e-07     7.666719e-02     1.000000e+00     2.153954e-02   
-7       1.788210e-13     1.883275e-02     1.000000e+00     2.150567e-04   
-8       6.603577e-25     3.301059e-06     1.000000e+00     9.320139e-07   
+1       9.776544e+00     3.623485e+03     1.000000e+00     6.871828e+00   
+2       4.830193e+00     6.291767e+00     5.000000e-01     8.108308e+00   
+3       1.102400e+00     7.738308e+01     1.000000e+00     1.141526e+00   
+4       2.398568e-01     1.027974e+01     1.000000e+00     1.972548e+00   
+5       4.852552e-03     2.072324e+01     1.000000e+00     2.333712e-01   
+6       9.313953e-06     5.421189e-01     1.000000e+00     1.523076e-01   
+7       8.941048e-12     1.331677e-01     1.000000e+00     1.520681e-03   
+8       3.301788e-23     2.334201e-05     1.000000e+00     6.590334e-06   
 ‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
  ──────────────────────────────────────────────────────────────────────────────
                                        Time                   Allocations      
                                ──────────────────────   ───────────────────────
-       Tot / % measured:           1.60ms / 86.1%            213KiB / 92.9%    
+       Tot / % measured:            5.63s / 68.0%            304MiB / 66.0%    
 
  Section               ncalls     time   %tot     avg     alloc   %tot      avg
  ──────────────────────────────────────────────────────────────────────────────
- newton_modified            1   1.38ms   100%  1.38ms    198KiB  100%    198KiB
-   linear_solver            8   1.25ms  91.0%   157μs    138KiB  69.8%  17.3KiB
-   backtrack_line_s...      8   40.5μs  2.94%  5.06μs   12.7KiB  6.42%  1.59KiB
+ newton_modified            1    3.83s   100%   3.83s    201MiB  100%    201MiB
+   linear_solver            8    3.29s  86.0%   412ms    183MiB  91.2%  22.9MiB
+   backtrack_line_s...      8    424ms  11.1%  53.0ms   16.5MiB  8.23%  2.07MiB
  ──────────────────────────────────────────────────────────────────────────────
 
 EXIT: convergence has been achieved.
