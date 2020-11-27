@@ -8,10 +8,10 @@ método queintegra a classe de algoritmos clássicos para otimização e permane
 assunto de pesquisa relevante até os dias de hoje. O presente trabalho parte da
 formulação do problema de minimização sem restrições, uma introdução aos métodos de
 direções conjugadas, alguns conceitos pré-requisitos para a plena compreensão dos
-gradientes conjugados \replaced{e}{, encerrando com} sua integração com o método de
-Newton para a solução de problemas de minimização. Ademais, foi feita uma implementação
-do método estudado na linguagem Julia e experimentos numéricos permitiram a validação
-do algoritmo estudado, além de comparações com outro método da literatura.
+gradientes conjugados e sua integração com o método de Newton para a solução de
+problemas de minimização. Ademais, foi feita uma implementação do método estudado
+na linguagem Julia e experimentos numéricos permitiram a validação do algoritmo
+estudado, além de comparações com outro método da literatura.
 
 # Metodologia
 
