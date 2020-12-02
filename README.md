@@ -45,3 +45,7 @@ problemas de minimização irrestrita de grande porte. Em especial, apresentou b
 resultados de desempenho nos problemas com grande quantidade de variáveis. Diante
 disso, vimos que o método de gradientes conjugados mostrou robustez nos quesitos
 analisados e, à vista de suas propriedades, mostrou-se um campo fértil para avanços.
+
+# Apresentação
+
+[Disponível no youtube](https://youtu.be/hC9yRJmWDYQ)
